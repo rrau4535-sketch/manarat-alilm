@@ -4,14 +4,14 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function ProfileRedirect() {
-  const { profile, loading } = useAuth();
+  const { profile, ready } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (loading) return;
+    if (!ready) return;
     if (profile) router.replace(`/profile/${profile.username}`);
     else router.replace('/auth');
-  }, [profile, loading, router]);
+  }, [profile, ready, router]);
 
   return (
     <div className="flex items-center justify-center min-h-[60vh]">

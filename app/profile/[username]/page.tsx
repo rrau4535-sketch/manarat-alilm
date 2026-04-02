@@ -61,8 +61,8 @@ export default function ProfilePage() {
       }
     }
     
-    if (newName && newName !== username) {
-      const { error } = await supabase.from('profiles').update({ username: newName }).eq('id', currentUser?.id);
+    if (newName && newName !== username && currentUser?.id) {
+      const { error } = await supabase.from('profiles').update({ username: newName }).eq('id', currentUser.id);
       if (error) {
         setSettingsMsg({ text: 'هذا الاسم مستخدم بالفعل أو حدث خطأ', type: 'error' });
         setSaving(false);
